@@ -10,7 +10,7 @@ const PORT = 5000;
 const app = express();
 
 //connect to DB
-const dbURI = 'mongodb+srv://MuhndBlgs:Muhnd1234@blogdb.7uqkr.mongodb.net/Blog-node?retryWrites=true&w=majority';
+
 mongoose.connect(dbURI)
 .then((result)=>{
     console.log('connected to db')
