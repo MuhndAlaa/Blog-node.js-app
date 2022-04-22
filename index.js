@@ -2,14 +2,20 @@ const express = require('express');
 const { param } = require('express/lib/request');
 const mongoose = require('mongoose');
 const Blog = require('./models/blog');
+require('dotenv').config();
+
 
 // listen to port 5000
-const PORT = 5000;
+const PORT = process.env.PORT;
+const DB_USERNAME = process.env.DB_USERNAME;
+const DB_PASSWORD = process.env.DB_PASSWORD;
 
 //express app
 const app = express();
 
+
 //connect to DB
+const dbURI = `mongodb+srv://${DB_USERNAME}:${DB_PASSWORD}@blogdb.7uqkr.mongodb.net/Blog-node?retryWrites=true&w=majority`;
 
 mongoose.connect(dbURI)
 .then((result)=>{
@@ -27,31 +33,6 @@ app.use(express.static('public'));
 app.use(express.urlencoded({extended:true}))
 
 
-//mongoose routes
-// app.get('/add-blog',(req,res)=>{
-//     const blog = new Blog({
-//         title:'first blog',
-//         snippet:'a snippet about Blog',
-//         body:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, velit?'
-//     })
-
-//     blog.save().then((result)=>{
-//         res.send(result)
-//     })
-//     .catch((err)=>{
-//         console.log(err)
-//     })
-// })
-
-// app.get('/all-blogs' , (req,res)=>{
-//     Blog.find()
-//     .then(result=>{
-//         res.send(result)
-//     })
-//     .catch(err=>{
-//         console.log(err)
-//     })
-// })
 
 app.get('/' , (req,res)=>{
     res.redirect('/blogs')
@@ -61,7 +42,6 @@ app.get('/blogs' , (req,res)=>{
     Blog.find()
     .sort({createdAt:-1})
     .then(result=>{
-        res.send(result)
         res.render('index' , {title:'all Blogs' , blogs:result})
     })
     .catch(err=>{
