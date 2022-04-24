@@ -1,4 +1,25 @@
 <%- include('./partials/header.ejs') %>
 <h1>Blog homepage work! !</h1>
-<%= blogs %>
+<div class="row">
+<% for(const blog of blogs) { %>
+    <div class="col-lg-4">
+    <a href="/blogs/<%= blog._id %>">
+      <div class="card border-success mb-3" style="max-width: 18rem;">
+        <div class="card-header bg-transparent border-success"><h5 class="card-title"><%= blog.title %></h5></div>
+        <div class="card-body text-success">
+          <p class="card-text"><%= blog.snippet %></p>
+        </div>
+        <div class="card-footer bg-transparent border-success">
+          <button id="deleteBtn" data-doc="<%= blog._id %>">Delete</button>
+          <a href="/blogs/modify/<%= blog._id %>">Update</a>
+        </div>
+    </div>
+    </a>
+    </div>
+<% } %>
+</div>
+
+
 <%- include('./partials/footer.ejs') %>
+
+

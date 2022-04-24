@@ -1,3 +1,24 @@
 body{
     font-family: 'Poppins', sans-serif;
 }
+
+:root{
+    --main-color:crimson;
+    --bg-main:#212121;
+    --bg-secondry:#191919;
+}
+
+.navbar-color{
+    background-color: var(--bg-secondry) !important;
+    color: #fff !important;
+}
+
+.navbar-color li a,
+a.navbar-brand:hover{
+    color: #fff !important;
+}
+
+.navbar-color li a:hover,
+a.navbar-brand{
+    color: var(--main-color) !important;
+}

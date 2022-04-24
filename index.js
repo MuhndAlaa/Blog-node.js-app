@@ -30,6 +30,7 @@ app.set('view engine' , 'ejs');
 
 //static files
 app.use(express.static('public'));
+app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 
 
@@ -64,19 +65,59 @@ app.post('/blogs' , (req,res)=>{
     
 })
 
-app.get('/blogs/:id' , (req,res)=>{
+app.put('/blogs/update/:id' , (req,res)=>{
+    
     const id = req.params.id;
-    Blog.findById(id)
+    Blog.findByIdAndUpdate(id , req.body)
     .then(result=>{
-        app.render('details' , {title:'details' , blog:result})
+        res.json({ redirect:'/blogs'})
     })
     .catch(err=>{
-        console.log(id)
+        console.log(err)
     })
 })
 
 app.get('/blogs/create' , (req,res)=>{
     res.render('create blog' , {title:'create post'})
+})
+
+app.get('/blogs/modify/:id' , (req,res)=>{
+    
+    const id = req.params.id;
+    Blog.findById(id)
+    .then(result=>{
+        res.render('modify' , {title:'modify' , blog:result})
+    })
+    .catch(err=>{
+        console.log(err)
+    })
+})
+
+app.get('/blogs/:id' , (req,res)=>{
+    
+    const id = req.params.id;
+    Blog.findById(id)
+    .then(result=>{
+        res.render('details' , {title:'details' , blog:result})
+    })
+    .catch(err=>{
+        console.log(err)
+    })
+})
+
+
+
+
+app.delete('/blogs/:id' , (req,res)=>{
+    
+    const id = req.params.id;
+    Blog.findByIdAndDelete(id)
+    .then(result=>{
+        res.json({ redirect:'/blogs'})
+    })
+    .catch(err=>{
+        console.log(err)
+    })
 })
 
 app.get('/about' , (req,res)=>{

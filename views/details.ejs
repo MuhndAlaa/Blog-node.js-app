@@ -1,3 +1,10 @@
 <%- include('./partials/header.ejs') %>
-<h1>Blog details work!</h1>
+<div class="card border-success mb-3" style="max-width: 18rem;">
+    <div class="card-header bg-transparent border-success"><h5 class="card-title"><%= blog.title %></h5></div>
+    <div class="card-body text-success">
+      <p class="card-text"><%= blog.snippet %></p>
+      <p class="card-title"><%= blog.body %></p>
+    </div>
+    <div class="card-footer bg-transparent border-success">Footer</div>
+</div>
 <%- include('./partials/footer.ejs') %>

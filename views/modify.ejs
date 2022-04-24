@@ -1,0 +1,18 @@
+<%- include('./partials/header.ejs') %>
+<h1>Blog create post form!</h1>
+
+
+<form id="updateForm">
+    <label for="title">Blog title:</label>
+    <input id="title" type="text" name="title" value="<%= blog.title %>" required>
+
+    <label for="snippet">Blog snippet:</label>
+    <input id="snippet" type="text" name="snippet" value="<%= blog.snippet %>" required>
+
+    <label for="body">Blog body:</label>
+    <textarea id="body" name="body" required><%= blog.body %></textarea>
+
+    <button id="updateBtn" data-doc="<%= blog._id %>">update</button>
+</form>
+
+<%- include('./partials/footer.ejs') %>
